@@ -1,0 +1,221 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+
+
+.page{
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+}
+
+.lpage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:flex-end;
+    
+}
+
+.rpage{
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: center;
+    width: 677px;
+    margin-left: 200px;
+}
+
+.ldpage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ldlpage{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:flex-start;
+    background-color: #f4f4f5;
+
+}
+
+.ldrpage{
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items:flex-start;
+    width: 414px;
+    background-color: #ffffff;
+    height: 463px;
+    border-top: #acaaaa 1px solid;
+    border-right: #acaaaa 1px solid;
+}
+
+.option{
+    padding:20px 20px 20px 20px;
+    background-color: #f4f4f5;
+    min-width: 85px;
+    border-top: #acaaaa 1px solid;
+    border-bottom: #acaaaa 1px solid;
+}
+
+.ldrt{
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.ldrb{
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.element{
+    display: flex;
+    margin-top: 20px;
+    margin-left: 20px;
+    align-items: center;
+    
+    width: 100%;
+
+    
+}
+
+.payimg{
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 50px;
+    width: 55px;
+}
+
+.Bar{
+
+    width: 80%;
+    height: 30px;
+
+    background-color: rgba(225, 225, 225, 0.2);
+    display: flex;
+    align-items: center;
+    border-radius:5px;
+    padding: 10px 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border: 1px solid rgb(228, 226, 226);
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.Bar input{
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline:black;
+    padding: 24px 20px;
+}
+
+.dextra{
+    display: flex;
+    max-width: 414px;
+}
+
+
+.lrcont{
+    display: flex;
+    width: 100%;
+    
+  }
+  #pb{
+    width: 100%;
+    margin-left: 20px;
+    max-width: 20%;
+  }
+  
+  .leftdes{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 50%;
+  
+  
+  }
+  
+  .rightdes{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 50%;
+  
+  }
+  
+  .pr{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  
+  }
+  
+  .op{
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+  .opv{
+    font-size: 15px;
+    margin-bottom: 10px;
+    
+  }
+  
+  .dp{
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+  
+  .dpv{
+    font-size: 15px;
+    margin-bottom: 10px;
+    color: green;
+  
+  }
+  
+  .shipping{
+    font-size: 15px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid black;
+    padding-bottom: 2px;
+  
+  }
+  
+  .shippingv{
+    font-size: 15px;
+    margin-bottom: 10px;
+    color: green;
+    padding-bottom: 2px;
+    border-bottom: 1px solid black;
+  
+  }
+  
+  .total{
+    font-size: 20px;
+    font-weight: bold;
+    
+    
+  
+  }
+  
+  .totalv{
+    font-size: 20px;
+    font-weight: bold;
+    
+    
+  
+  }
+  

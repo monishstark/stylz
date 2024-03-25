@@ -1,0 +1,101 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Assistant,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+}
+
+.page{
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+}
+
+.lside{
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    
+    
+    margin-top: 10px;
+    max-width: 848px;
+}
+
+.rside{
+    min-height: 420px;
+    width: 50%;
+    
+    
+    margin-top: 10px;
+
+    height: 420px;
+    min-width: 848px;
+}
+
+.ctitle{
+    font-size: 25px;
+    font-weight: bold;
+    
+    margin-bottom: 5px;
+  }
+
+  .cdes {
+    font-size: 15px;
+    color: rgb(93, 98, 96);
+    margin-bottom: 10px;
+}
+
+  .price{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.cp{
+    font-size: 15px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.p{
+    font-size: 15px;
+    margin-right: 10px; 
+    text-decoration: line-through;
+}
+.d{
+    font-size: 15px;
+    margin-right: 10px;
+    color: red;
+}
+
+.addcart{
+    display: flex;
+    height: 53px;
+    width: 300px;
+    justify-content: center;
+    align-items: center;
+    background-color: #ff3e6c;
+  border: 1px solid #ff3e6c;
+  border-radius: 5px;
+
+}
+
+.bgimg{
+    height: 35px;
+    width: 35px;
+    opacity: 0.8;
+}
+.textcart{
+    font-size: 25px;
+    font-family: Assistant,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    color: #fff;cursor: pointer;
+    font-weight: bold;
+    margin-left: 5px;
+
+}
+

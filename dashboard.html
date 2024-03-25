@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="dashboard.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard</h1>
+        
+        
+        <div class="form-container">
+            <h2>Add New Product</h2>
+            
+                <label for="id">ID:</label>
+                <input type="text" id="id" name="id" required>
+                <label for="pname">Product Name:</label>
+                <input type="text" id="pname" name="pname" required>
+                <label for="pdetails">Product Details:</label>
+                <input type="text" id="pdetails" name="pdetails" required>
+                <label for="price">Price:</label>
+                <input type="text" id="price" name="price" required>
+                <label for="discount">Discount:</label>
+                <input type="text" id="discount" name="discount" required>
+                <label for="type">Type:</label>
+                <input type="text" id="type" name="type" required>
+                <label for="img">Image:</label>
+                <input type="text" id="img" name="img" required>
+                <input type="submit"  onclick="addProduct()">
+            
+        </div>
+    </div>
+
+    <script>
+        async function addProduct() {
+            try {
+                console.log("hello");
+                let id = document.getElementById("id").value;
+                let pname = document.getElementById("pname").value;
+                let pdetails = document.getElementById("pdetails").value;
+                let price = document.getElementById("price").value;
+                let discount = document.getElementById("discount").value;
+                let type = document.getElementById("type").value;
+                let img = document.getElementById("img").value;
+
+
+                let response = await fetch("http://localhost:8080/mistyles/AddProduct", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                "id": id,
+                "pname": pname,
+                "pdetails": pdetails,
+                "price": price,
+                "discount": discount,
+                "type": type,
+                "img": img
+            })
+        });
+
+        console.log(response.status);
+                if (response.status == 200 || response.status == 201) {
+                    alert("Product Added");
+                    window.location.href = "dashboard.html";
+                } else {
+                    alert("Product not added");
+                }
+            }
+            catch (err) {
+                console.log(err);
+            }
+        }
+    </script>
+</body>
+</html>

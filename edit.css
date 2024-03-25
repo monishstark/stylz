@@ -1,0 +1,53 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.op{
+    display: flex;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+.opv{
+    font-size: 15px;
+    margin-bottom: 10px;
+    
+}
+
+.dp{
+    display: flex;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.dpv{
+    font-size: 15px;
+    margin-bottom: 10px;
+    color: green;
+
+}
+
+.shipping{
+    font-size: 15px;
+    margin-bottom: 10px;
+
+    padding-bottom: 2px;
+
+}
+
+.shippingv{
+    font-size: 15px;
+    margin-bottom: 10px;
+    color: green;
+    padding-bottom: 2px;
+
+
+}
+
+.logoimg{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 200px;
+    height: 200px;
+}

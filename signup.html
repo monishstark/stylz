@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Log In</title>
+    <link rel="stylesheet" type="text/css" href="signup.css">
+</html>
+
+<body>
+    <div class="page">
+        <div class="login_block">
+            <img src="signup.gif" class="logoimg">
+        
+            <form action="" class="Bar" id="cityForm" >
+                <input type="text" id ="name" placeholder="Enter name" autocomplete="off">
+                
+            </form>
+            <form action="" class="Bar" id="cityForm" >
+                <input type="tel"  id ="phone" placeholder="Enter Phone no" autocomplete="off">
+                
+            </form>
+            <form action="" class="Bar" id="cityForm" >
+                <input type="text" id ="email" placeholder="Enter email" autocomplete="off">
+                
+            </form>
+            <form action="" class="Bar" id="cityForm" >
+                <input type="password" id ="password" placeholder="Enter password" autocomplete="off">
+                
+            </form>
+            <div class="button">
+                <button id ="btn" onclick="signup()" type="submit" >CONTINUE</button>
+
+        </div>
+       
+
+    </div>
+
+    <script>
+        async function signup() {
+    try {
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+        let phone = document.getElementById("phone").value;
+        let response = await fetch("http://localhost:8080/mistyles/SignUp", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                "name": name,
+                "email": email,
+                "password": password,
+                "phone": phone
+            })
+        });
+
+        console.log(response.status);
+        if (response.status == 200 || response.status == 201) {
+            alert("Sign Up Successful");
+            window.location.href = "index.html";
+        } else {
+            alert("Email already exists");
+        }
+
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+    </script>
+</body>
+</html>

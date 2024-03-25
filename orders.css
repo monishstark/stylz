@@ -1,0 +1,90 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.page {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    padding: 20px;
+  }
+
+  #delblock{
+    display: flex;
+    flex-direction: column; 
+    justify-content: flex-start;
+  }
+  
+  
+  .cards{
+    display: flex;
+    width: 800px;
+    
+  }
+
+.cards:hover {
+    transform: translateY(-10px); 
+}
+
+.oimg {
+    width: 200px;
+    height: 500px;
+    object-fit: cover;
+}
+
+.odes {
+    padding: 10px;
+    width: 300px;
+}
+
+.name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.des {
+    font-size: 14px;
+    margin-top: 5px;
+    color: #555;
+}
+
+.del {
+    font-size: 12px;
+    margin-top: 5px;
+    color: #888;
+}
+
+.op {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #007bff; 
+}
+
+.add {
+    width: 300px;
+    padding: 20px;
+    margin: 15px;
+    box-shadow: 0 4px 12px 0 rgb(84, 90, 92);
+    background-color: #ffffff;
+}
+
+.addhead {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.addbody {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #555;
+}

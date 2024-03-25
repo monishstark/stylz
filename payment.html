@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="payment.css">
+        <link rel="stylesheet" href="header.css">
+        <meta charset="UTF-8">
+
+    </head>
+    <body>
+        <div class="header">
+            <div class="leftpart">
+            <div><img src="shopping-bag.gif" class="logoimg" onclick="callhome()" style="height: 50px;
+                width: 50px;
+                margin-left: 30px;"></div>
+        </div>
+        <div class="rightpart">
+            <form action="" class="searchBar" id="cityForm" >
+                <input type="text" id ="cityInput"placeholder="Search for products" autocomplete="off" style="height: 20px;">
+                <button id ="btn"type="submit" ><img src="search-interface-symbol.png" class="btnimg"></button>
+            </form>
+            <div class="pcont" onclick="callprofile()">
+                <img src="user.png" class="pimg">
+                <div >Profile</div>
+            </div>
+            <div class="ccont">
+                <img src="shopping-cart.png" class="cartimg">
+                <div>Cart</div>
+            </div>
+        </div>
+
+    </div>
+
+        <div class="page">
+            <div class="lpage">
+                <div id="lupage" >
+                    <a href="address.html" style="text-decoration: none;color: #ff3f6c;">enter address</a>
+
+                </div>
+                <div class="ldtitle">Payment</div>
+                <div class="ldpage">
+                    
+                    <div class="ldlpage" style="height: 463px;">
+                        <div class="option" id="cod" onclick="cod()"> COD</div>
+                        <div class="option"  id ="upi"onclick="upi()">UPI</div>
+                        <div class="option" id="card"onclick="card()">CARD</div>
+                        <div class="option" id="net" onclick="net()">NET</div>
+
+
+                    </div>
+                    <div class="ldrpage" id="ldr">
+
+
+                    </div>
+
+                </div>
+                <div class="button" >
+                    <div id ="btn" onclick="order()" type="submit" style="cursor: pointer;
+                        background-color: #ff3f6c;
+                        text-align: center;
+                        padding: 12px;
+                        color: #fff;
+                        font-weight: 700;
+                        font-size: 14px;
+                        line-height: 16px;
+                        width: 499px;
+                        " >Continue</div>
+            </div>
+
+
+            </div>
+            <div class="rpage" id="rpg">
+
+
+            </div>
+
+        </div>
+
+        
+
+        <script>
+            getCart();
+            getaddress();
+
+            function cod() {
+                var ldr = document.getElementById("ldr");
+                var cd=document.getElementById("cod");
+                var up=document.getElementById("upi");
+                var cr=document.getElementById("card");
+                var nt=document.getElementById("net");
+
+                up.style.backgroundColor="f4f4f5";
+                up.style.borderLeft="none";
+                cr.style.backgroundColor="f4f4f5";
+                cr.style.borderLeft="none";
+                nt.style.backgroundColor="f4f4f5";
+                nt.style.borderLeft="none";
+                
+                ldr.innerHTML = `<div class="ldrt">Cash On Delivery</div>
+                                <div class="ldrb">
+                                    <div class="ldrbt">Pay on delivery</div>
+                                    <div class="ldrbm">Pay when you receive your order</div>
+                                </div>
+                                `;
+                
+                cd.style.backgroundColor="rgb(255, 255, 255)";
+                cd.style.borderLeft="4px solid #ff3f6c";
+
+
+                
+            }
+
+            function upi() {
+                var ldr = document.getElementById("ldr");
+                var cd=document.getElementById("cod");
+                var up=document.getElementById("upi");
+                var cr=document.getElementById("card");
+                var nt=document.getElementById("net");
+
+                cd.style.backgroundColor="f4f4f5";
+                cd.style.borderLeft="none";
+                cr.style.backgroundColor="f4f4f5";
+                cr.style.borderLeft="none";
+                nt.style.backgroundColor="f4f4f5";
+                nt.style.borderLeft="none";
+
+                ldr.innerHTML = `<div class="ldrt">UPI</div>
+                                        <div class="element">
+                                    <input type="radio">
+                                    <img src="PhonePe_Logo_PNG1.png" alt="" class="payimg">
+                                    <div>Phone pay</div>
+                                </div>
+                                <div class="element">
+                                    <input type="radio">
+                                    <img src="Google_Pay_logo_PNG5.png" alt="" class="payimg">
+                                    <div>Google pay</div>
+                                </div>
+                                <div class="element">
+                                    <input type="radio">
+                                    <img src="Apple_Pay_logo_PNG1.png" alt="" class="payimg">
+                                    <div>Apple pay</div>
+                                </div>
+                                `;
+                up.style.backgroundColor="rgb(255, 255, 255)";
+                up.style.borderLeft="4px solid #ff3f6c";
+            }
+
+            function card(){
+                var ldr = document.getElementById("ldr");
+                var cd=document.getElementById("cod");
+                var up=document.getElementById("upi");
+                var cr=document.getElementById("card");
+                var nt=document.getElementById("net");
+
+                up.style.backgroundColor="f4f4f5";
+                up.style.borderLeft="none";
+                cd.style.backgroundColor="f4f4f5";
+                cd.style.borderLeft="none";
+                nt.style.backgroundColor="f4f4f5";
+                nt.style.borderLeft="none";
+
+                ldr.innerHTML=`<div class="ldrt">Card</div>
+                                <form action="" class="Bar" id="cityForm" >
+                                    <input type="text" id ="Locality" placeholder="Card Number" autocomplete="off">
+                                    
+                                </form>
+                                <form action="" class="Bar" id="cityForm" >
+                                    <input type="text" id ="Locality" placeholder="Nmae on Card" autocomplete="off">
+                                    
+                                </form>
+                                <div class="dextra">
+                                    <form action="" class="Bar" id="cityForm" style="width: 40%;">
+                                        <input type="text" id ="Locality" placeholder="valid" autocomplete="off">
+                                        
+                                    </form>
+                                    <form action="" class="Bar" id="cityForm" style="width: 40%;">
+                                        <input type="text" id ="Locality" placeholder="cvv" autocomplete="off">
+                                        
+                                    </form>
+                                </div>
+                                `;
+                cr.style.backgroundColor="rgb(255, 255, 255)";
+                cr.style.borderLeft="4px solid #ff3f6c";
+
+            }
+
+            function net(){
+                var ldr = document.getElementById("ldr");
+                var cd=document.getElementById("cod");
+                var up=document.getElementById("upi");
+                var cr=document.getElementById("card");
+                var nt=document.getElementById("net");
+
+                up.style.backgroundColor="f4f4f5";
+                up.style.borderLeft="none";
+                cr.style.backgroundColor="f4f4f5";
+                cr.style.borderLeft="none";
+                cd.style.backgroundColor="f4f4f5";
+                cd.style.borderLeft="none";
+                ldr.innerHTML=`<div class="ldrt">Net Banking</div>
+                                <div class="element">
+                                    <input type="radio">
+                                    <img src="PhonePe_Logo_PNG1.png" alt="" class="payimg">
+                                    <div>Phone pay</div>
+                                </div>
+                                <div class="element">
+                                    <input type="radio">
+                                    <img src="Google_Pay_logo_PNG5.png" alt="" class="payimg">
+                                    <div>Google pay</div>
+                                </div>
+                                <div class="element">
+                                    <input type="radio">
+                                    <img src="Apple_Pay_logo_PNG1.png" alt="" class="payimg">
+                                    <div>Apple pay</div>
+                                </div>
+                                `;
+                nt.style.backgroundColor="rgb(255, 255, 255)";
+                nt.style.borderLeft="4px solid #ff3f6c";
+            }
+
+            
+            
+            async function getCart(){
+                try{
+                    const response = await fetch('http://localhost:8080/mistyles/CartServlet');
+                    const data =   await response.json();
+                    console.log(data);
+                    var i=0;
+                    
+                    var temp="";
+                    var totalprice=0;
+                    var orginalprice=0;
+                    var items=0;
+                    while (i<data.length) {
+                        items++;
+                        orginalprice+=parseInt(data[i].price);
+                        totalprice+=price(data[i].price,data[i].discount);
+                    i++;}
+
+                    var pricecard = document.getElementById('rpg');
+                    pricecard.innerHTML=`<div class="pr">Price detail (${items} item)</div>
+                            <div class="lrcont">
+                                
+                                <div class="leftdes">
+                                <div class="op">Total MRP</div>
+                                <div class="dp">Discount</div>
+                                <div class="shipping">Shipping charges</div>
+                                <div class="total">Total Amount</div>
+                                </div>
+                                <div class="rightdes">
+                                <div class="opv">₹${orginalprice}</div>
+                                <div class="dpv">-₹${orginalprice-totalprice}</div>
+                                <div class="shippingv">Free</div>
+                                <div class="totalv">₹${totalprice}</div>
+                                </div>
+
+
+                            </div>`;
+                    
+                }catch(error){
+                    console.error('Error:', error);
+                }
+            }
+
+
+
+            function price(p,d){
+                return Math.round(p-(p*d/100));
+            }
+
+            async function order(){
+                try{
+                    const response = await fetch('http://localhost:8080/mistyles/Orders');
+
+                    const res=await fetch('http://localhost:8080/mistyles/SendMail');
+                    
+                    console.log(res);
+                    showToast();
+                    window.location.href="home.html";
+                    
+                    
+                }
+                catch(error){
+                    console.error('Error:', error);
+                }
+            }
+
+            async function getaddress(){
+                try{
+                    const response=await fetch('http://localhost:8080/mistyles/AddressServlet');
+                    const data=await response.json();
+                    console.log(data);
+                    if (data.length==0) {
+                        var ldr = document.getElementById("lupage");
+                        ldr.innerHTML=`<div class="lut">Address</div>
+                                <div class="lub">
+                                    <div class="lub1">No Address</div>
+                                    <div class="lub2">Add Address</div>
+                                    <a href="address.html" style="text-decoration: none;color: #ff3f6c;">enter address</a>
+                                </div>
+                                `;
+                    }
+                    else{
+                        var ldr = document.getElementById("lupage");
+                        ldr.innerHTML=`<div class="lut">Address</div>
+                                <div class="lub">
+                                    <div class="lub1">${data[0].name}</div>
+                                    <div class="lub2">${data[0].address}</div>
+                                    <div class="lub3">${data[0].locality}</div>
+                                    <div class="lub4">${data[0].pin}</div>
+                                </div>
+                                `;
+                    }
+                }
+                catch(error){
+                    console.error('Error:', error);
+                }
+            }
+
+            function showToast() {
+                const toast = document.createElement("div");
+                toast.classList.add("toast");
+                toast.textContent = "Order sucessesful";
+                document.body.appendChild(toast);
+
+                setTimeout(function() {
+                    toast.remove();
+                }, 2000);
+            }
+        </script>
+        <style>
+            .toast {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 9999;
+}
+
+.toast.show {
+  opacity: 1;
+}
+#lupage{
+    width: 499px;
+}
+.lut {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .lub {
+        background-color: #f5f5f5;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .lub1 {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .lub2, .lub3, .lub4 {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+        </style>
+
+    </body>
+</html>

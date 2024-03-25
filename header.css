@@ -1,0 +1,134 @@
+body {
+    margin: 0;
+    font-family: Assistant,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  }
+
+
+  .header{
+    display: flex;
+    justify-content: center;
+   align-items: center;
+   position: sticky;
+   top: 0;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 4px 12px 0 rgb(154, 157, 158);
+    z-index: 1000;
+    
+  }
+
+  .autocomplete-suggestions {
+    width: 30%;
+    margin-left: 1050px;
+    box-shadow: 3px 3px 6px 0 rgb(154, 157, 158);
+    z-index: 1001;
+    position: fixed; /* Use 'fixed' instead of 'sticky' */
+    top: 82.5px; /* Position from the top of the viewport */
+    max-height: 80vh; /* Set a maximum height for the suggestions box */
+    overflow-y: auto; /* Add a scrollbar when content overflows */
+    background-color: white;
+}
+
+.sug{
+  margin-left: 20px;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+
+  .home {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 2000px;
+    margin-top: 80px;
+  }
+  .leftpart{
+    display: flex;
+    align-items: center;
+    width: 50%;
+   
+    margin-left: 0px;
+  }
+  .rightpart{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 50%;
+    margin-right: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .pcont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .ccont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    margin-left: 10px;
+
+  }
+
+  .pimg{
+    height: 20px;
+    width: 20px;
+  }
+
+  .cartimg{
+    height: 20px;
+    width: 20px;
+  }
+
+  .logoimg{
+    height: 50px;
+    width: 50px;
+    margin-left: 30px;
+  }
+
+  .searchBar{
+    width: 100%;
+    
+    max-width: 500px;
+    background-color: rgba(225, 225, 225, 0.2);
+    display: flex;
+    align-items: center;
+    border-radius: 60px;
+    padding: 10px 20px;
+    margin-left: 5px;
+    border: 1px solid rgb(159, 152, 152);
+}
+
+.searchBar input{
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline:black;
+    padding: 24px 20px;
+}
+
+.searchBar button{
+    width: 60px;
+    height: 60px;
+    border: 0;
+    border-radius: 50%;
+    background-color:rgba(225, 225, 225, 0.05);
+
+
+
+}
+.btnimg{
+    height: 25px;
+    width: 25px;}

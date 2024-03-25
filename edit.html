@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="profile.css">
+
+    </head>
+    <body>
+        <div class="header">
+            <div class="leftpart">
+            <div><img src="shopping-bag.gif" class="logimg" onclick="callhome()"></div>
+        </div>
+        <div class="rightpart">
+            <form action="" class="searchBar" id="cityForm" >
+                <input type="text" id ="cityInput"placeholder="Search for products" autocomplete="off">
+                <button id ="btn"type="submit" ><img src="search-interface-symbol.png" class="btnimg"></button>
+            </form>
+            <div class="pcont" >
+                <img src="user.png" class="pimg">
+                <div >Profile</div>
+            </div>
+            <div class="ccont" onclick="callcart()">
+                <img src="shopping-cart.png" class="cartimg">
+                <div>Cart</div>
+            </div>
+        </div>
+
+    </div>
+        <div class="page">
+            <div id="login_block">
+            </div>
+        </div>
+
+        
+
+        <script>
+            profile();
+
+            async function profile() {
+                try {
+                    const response = await fetch('http://localhost:8080/mistyles/SignUp');
+                    const data = await response.json();
+
+                    const res= await fetch('http://localhost:8080/mistyles/Photo');
+                    const blob=await res.blob();
+                    const imageurl = URL.createObjectURL(blob);
+
+                    const cards = document.getElementById('login_block');
+                    console.log(data[0]["name"]);
+
+                    cards.innerHTML = `<div>
+                            
+                        <img src="${imageurl}"  onerror="this.onerror=null; this.src='user (1).png';" onclick="calleditpic()"  class="logoimg" style="border-radius: 100px; cursor:pointer">
+                            </div>
+                            <div class="lrcont">   
+                                <div class="leftdes">
+                                    <div class="op">Name:<form action="" class="Bar" id="cityForm" >
+                                            <input type="text" id ="name" placeholder="Enter name" autocomplete="off">
+                                            
+                                        </form></div>
+                                    <div class="dp">Phone:<form action="" class="Bar" id="cityForm" >
+                                            <input type="text" id ="phone" placeholder="Enter phone no" autocomplete="off">
+                                            
+                                        </form></div>
+                                    <div class="shipping">Email:${data[0].email}</div>
+                                </div>
+                                
+                                
+                            </div>
+
+                            <div class="button" >
+                                    <div id ="btn" onclick="edit()" type="submit" style="cursor: pointer;
+  background-color: #ff3f6c;
+  text-align: center;
+  padding: 12px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  width: 150px;
+  margin-bottom: 10px;" >SAVE</div>
+
+                                </div>
+
+                            
+                        `;
+
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }
+
+            function callcart(){
+                window.location.href = "cart.html";
+            }
+            function callhome(){
+                window.location.href="home.html";
+            }
+
+            function logout(){
+                try{
+                    fetch('http://localhost:8080/mistyles/Logout');
+                    window.location.href="index.html";
+                }
+                catch(error){
+                    console.error('Error:', error);
+                }
+            }
+
+            async function edit(){
+
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+
+                try{
+                    let response = await fetch("http://localhost:8080/mistyles/ProfileEdit", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            "name": name,
+                            "phone": phone
+                        })
+                    });
+                    window.location.href="profile.html";
+                }
+                catch(error){
+                    console.error('Error:', error);
+                }
+                
+            }
+
+            function calleditpic(){
+                window.location.href="test.html";
+            }
+        </script>
+    </body>
+</html>

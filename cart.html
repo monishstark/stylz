@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="cart.css">
+        <meta charset="UTF-8">
+
+    </head>
+    <body>
+        <div class="header">
+            <div class="leftpart">
+            <div><img src="shopping-bag.gif" class="logoimg" onclick="callhome()"></div>
+        </div>
+        <div class="rightpart">
+            <form action="" class="searchBar" id="cityForm" >
+                <input type="text" id ="cityInput"placeholder="Search for products" autocomplete="off">
+                <button id ="btn"type="submit" ><img src="search-interface-symbol.png" class="btnimg"></button>
+            </form>
+            <div class="pcont" onclick="callprofile()">
+                <img src="user.png" class="pimg">
+                <div >Profile</div>
+            </div>
+            <div class="ccont">
+                <img src="shopping-cart.png" class="cartimg">
+                <div>Cart</div>
+            </div>
+        </div>
+
+    </div>
+    
+        <div class="cart" >
+            <div class="left">
+                <div id="cartcards" >
+                    
+
+                </div>
+
+            </div>
+
+            <div class="right">
+                <div id="price">
+                    
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="cart2" style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 50px;"></div>
+
+
+
+
+        
+
+        
+
+        <script>
+
+            getCart();
+            
+
+            async function getCart(){
+                try{
+                    const response = await fetch('http://localhost:8080/mistyles/CartServlet');
+                    console.log(response.status);
+                    if(response.status==401||response.status==403 || response.status==404||response.status==400){
+                        emptycart();
+                    }
+                    else{
+                    const data =   await response.json();
+                    var i=0;
+                    const cards = document.getElementById('cartcards');
+                    var temp="";
+                    var totalprice=0;
+                    var orginalprice=0;
+                    var items=0;
+                    while (i<data.length) {
+                        items++;
+                        orginalprice+=parseInt(data[i].price);
+                        totalprice+=price(data[i].price,data[i].discount);
+
+                        temp+=`<div class="card">
+                                    <img src="${data[i].img}" class="img">
+                                    <div class="details">
+                                        <div class="pname">${data[i].pname}</div>
+                                        <div class="pdes">${data[i].pdetails}</div>
+                                        <div class="price">
+                                            <div class="cp">₹${price(data[i].price,data[i].discount)}</div>
+                                            <div class="p">₹${data[i].price}</div>
+                                            <div class="d">${data[i].discount}% OFF</div>
+                                            
+                                        </div>
+
+                                    </div>
+                                    <img src="close.png" class="close" onclick="remove('${data[i].id}', ${price(data[i].price, data[i].discount)})">
+                                </div>`;
+
+                        
+                        i++;
+                    }
+                    
+
+                    const pricecard = document.getElementById('price');
+                    var temp2="";
+                    temp2+=`<div class="pr">Price detail (${items} item)</div>
+                            <div class="lrcont">
+                                
+                                <div class="leftdes">
+                                <div class="op">Total MRP</div>
+                                <div class="dp">Discount</div>
+                                <div class="shipping">Shipping charges</div>
+                                <div class="total">Total Amount</div>
+                                </div>
+                                <div class="rightdes">
+                                <div class="opv">₹${orginalprice}</div>
+                                <div class="dpv">-₹${orginalprice-totalprice}</div>
+                                <div class="shippingv">Free</div>
+                                <div class="totalv">₹${totalprice}</div>
+                                </div>
+
+
+                            </div>
+                            <div class="button" >
+                                    <button id ="btn" onclick="orders()" type="submit" style="cursor: pointer;
+  background-color: #ff3f6c;
+  text-align: center;
+  padding: 12px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  width: 150px;
+  margin-bottom: 10px;
+  margin-top:10px; ">Continue</button>
+
+                                </div>`;
+                    
+                    pricecard.innerHTML=temp2;
+
+                    cards.innerHTML=temp;}
+                }catch(error){
+                    console.error('Error:', error);
+                }
+            }
+
+
+            function price(p,d){
+                return Math.round(p-(p*d/100));
+            }
+
+            async function remove(id, price) {
+                console.log(id + " " + price);
+
+                try {
+                    const response = await fetch('http://localhost:8080/mistyles/RemoveCart', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ "id": id, "price": price })
+                    });
+
+                    console.log(response.status);
+                    if (response.status == 200 || response.status == 201) {
+                        
+                        getCart();
+                        
+                    } else {
+                        emptycart();
+                    }
+                    
+
+                    
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert("Error removing from Cart");
+                }
+            }
+            function callhome(){
+                window.location.href="home.html";
+            }
+
+            function emptycart(){
+                const cards = document.getElementById('cart2');
+                        cards.innerHTML = `
+                                                
+                                                    <img src="shopping-bag.png" class="eimg">
+                                                
+                                                <div class="edes">Hey,it feels so light!</div>
+                                                <div class="edes2">There is nothing in your bag.Let's add some items.</div>
+                                            `;
+                        
+                   
+                
+            }
+            function callprofile(){
+                window.location.href = "profile.html";
+            }
+            
+            function address(){
+                window.location.href = "address.html";
+            }
+
+            function orders(){
+                
+                    window.location.href = "address.html";
+            }
+        </script>
+    </body>
+</html>

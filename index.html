@@ -1,0 +1,73 @@
+    <!DOCTYPE html>
+<html>
+<head>
+    <title>Log In</title>
+    <link rel="stylesheet" type="text/css" href="login.css">
+</html>
+
+<body>
+    <div class="page">
+        <div class="login_block">
+            <img src="shopping-bag.gif" class="logoimg">
+            <div class="title">
+                Login
+
+            </div>
+            <form action="" class="Bar" id="cityForm" >
+                <input type="text" id ="email" placeholder="Enter email" autocomplete="off">
+                
+            </form>
+            <form action="" class="Bar" id="cityForm" >
+                <input type="password" id ="password" placeholder="Enter password" autocomplete="off">
+                
+            </form>
+            <div class="button">
+                <button id ="btn" onclick="login()" type="submit" >CONTINUE</button>
+
+        </div>
+        <div >
+            New User? <a href="signup.html" class="newu">Sign Up</a>
+        </div>
+        <div>
+            <a href="admin.html" class="newu">Admin Login</a>
+        </div>
+        <div>
+            <a href="forgotpassword.html" class="newu" >Forgot password</a>
+        </div>
+
+    </div>
+
+    <script>
+        
+
+
+        async function login() {
+    try {
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+        let response = await fetch("http://localhost:8080/mistyles/Login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                "email": email,
+                "password": password
+            })
+        });
+        console.log(response.status);
+        if (response.status == 200 || response.status == 201) {
+            alert("Sign Up Successful");
+            window.location.href = "home.html";
+        } else {
+            alert("Email or password is wrong");
+        }
+
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+    </script>
+</body>
+</html>

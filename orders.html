@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="orders.css">
+        <link rel="stylesheet" href="home.css">
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <div class="header">
+            <div class="leftpart">
+            <div><img src="shopping-bag.gif" class="logoimg" onclick="callhome()"></div>
+        </div>
+        <div class="rightpart">
+            <form action="" class="searchBar" id="cityForm" >
+                <input type="text" id ="sInput"placeholder="Search for products" autocomplete="off">
+                <button id ="btn"type="submit" ><img src="search-interface-symbol.png" class="btnimg"></button>
+            </form>
+            <div class="pcont" id="pct" >
+                <img src="user.png" class="pimg">
+                <div >Profile</div>
+            </div>
+            <div class="ccont" onclick="callcart()">
+                <img src="shopping-cart.png" class="cartimg">
+                <div>Cart</div>
+            </div>
+        </div>
+
+    </div>
+        <div class="page">
+            <div id="delblock">
+            </div>
+            
+        </div>
+
+        <script>
+            getCart();
+
+            async function getCart() {
+                try {
+                    let response = await fetch("http://localhost:8080/mistyles/Orders", {
+                        method: "POST"
+                    });
+                    let data = await response.json();
+                    console.log(data);
+
+                    let res = await fetch("http://localhost:8080/mistyles/SignUp");
+                    let user = await res.json();
+                    var t = "";
+                    const cards = document.getElementById('delblock');
+
+                    for (var i = 0; i < data.length; i++) {
+                        var tp = price(data[i].price, data[i].discount);
+
+                        t += `<div class="cards">
+                                <div>
+                                    <img src="${data[i].img}" class="oimg">
+                                </div>
+                                <div class="odes">
+                                    <div class="name">${data[i].pname}</div>
+                                    <div class="des">${data[i].pdetails}</div>
+                                    <div class="del">Delivery in :${data[i].delivery} Days</div>
+                                </div>
+                                <div class="op">
+                                    <div class="price">₹${tp}</div>
+                                </div>
+                            </div>`;
+                    }
+                    console.log(user);
+                    t+=`<div class="add">
+                                        <div class="addhead">Delivery Address</div>
+                                        <div class="addbody">${user[0].address}</div>
+                                        <div class="addbody">${user[0].locality}</div>
+                                        <div class="addbody">${user[0].pin}</div>
+                                    </div>`;
+
+                    
+                    cards.innerHTML += t;
+
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }
+
+            function price(p, d) {
+                var t = p - (p * d / 100);
+                return t;
+            }
+
+            function callhome(){
+                window.location.href="home.html";
+            }
+        </script>
+    </body>
+</html>

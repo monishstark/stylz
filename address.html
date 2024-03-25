@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="address.css">
+        <meta charset="UTF-8">
+
+    </head>
+    <body>
+        <div class="header">
+            <div class="leftpart">
+            <div><img src="shopping-bag.gif" class="logoimg" onclick="callhome()" style="height: 50px;
+                width: 50px;
+                margin-left: 30px;"></div>
+        </div>
+        <div class="rightpart">
+            <form action="" class="searchBar" id="cityForm" >
+                <input type="text" id ="cityInput"placeholder="Search for products" autocomplete="off">
+                <button id ="btn"type="submit" ><img src="search-interface-symbol.png" class="btnimg"></button>
+            </form>
+            <div class="pcont" onclick="callprofile()">
+                <img src="user.png" class="pimg">
+                <div >Profile</div>
+            </div>
+            <div class="ccont">
+                <img src="shopping-cart.png" class="cartimg">
+                <div>Cart</div>
+            </div>
+        </div>
+
+    </div>
+        <div class="page">
+            <div class="paddblock">
+            <div class="addbloack" style="margin-bottom: 0;">
+                <div class="title" style="margin-left: 10px;">
+                    Contact details
+                </div>
+                <form action="" class="Bar" id="cityForm" >
+                    <input type="text" id ="name" placeholder="Name" autocomplete="off">
+                    
+                </form>
+                <form action="" class="Bar" id="cityForm" >
+                    <input type="text" id ="phone" placeholder="Phone no" autocomplete="off">
+                    
+                </form>
+                <div class="title" style="margin-left: 10px;">
+                    Address
+                    
+                </div>
+                <form action="" class="Bar" id="cityForm" >
+                    <input type="text" id ="Address" placeholder="Address" autocomplete="off">
+                    
+                </form>
+                <form action="" class="Bar" id="cityForm" >
+                    <input type="text" id ="Locality" placeholder="Locality" autocomplete="off">
+                    
+                </form>
+                <form action="" class="Bar" id="cityForm" >
+                    <input type="text" id ="Pin" placeholder="Pin code" autocomplete="off">
+                    
+                </form>
+
+                <a href="payment.html" style="text-decoration: none;">use saved address</a>
+                
+
+                </div>
+                <div class="button" >
+                    <div id ="btn" onclick="saveAddress()" type="submit" style="cursor: pointer;
+                        background-color: #ff3f6c;
+                        text-align: center;
+                        padding: 12px;
+                        color: #fff;
+                        font-weight: 700;
+                        font-size: 14px;
+                        line-height: 16px;
+                        width: 100%;
+                        " >Continue</div>
+            </div>
+
+
+            </div>
+            <div class="price_block" id="pb">
+
+            </div>
+
+        </div>
+
+        <script>
+            getCart();
+            
+            async function getCart(){
+                try{
+                    const response = await fetch('http://localhost:8080/mistyles/CartServlet');
+                    const data =   await response.json();
+                    var i=0;
+                    const cards = document.getElementById('cartcards');
+                    var temp="";
+                    var totalprice=0;
+                    var orginalprice=0;
+                    var items=0;
+                    while (i<data.length) {
+                        items++;
+                        orginalprice+=parseInt(data[i].price);
+                        totalprice+=price(data[i].price,data[i].discount);
+                    i++;}
+
+                    var pricecard = document.getElementById('pb');
+                    pricecard.innerHTML=`<div class="pr">Price detail (${items} item)</div>
+                            <div class="lrcont">
+                                
+                                <div class="leftdes">
+                                <div class="op">Total MRP</div>
+                                <div class="dp">Discount</div>
+                                <div class="shipping">Shipping charges</div>
+                                <div class="total">Total Amount</div>
+                                </div>
+                                <div class="rightdes">
+                                <div class="opv">₹${orginalprice}</div>
+                                <div class="dpv">-₹${orginalprice-totalprice}</div>
+                                <div class="shippingv">Free</div>
+                                <div class="totalv">₹${totalprice}</div>
+                                </div>
+
+
+                            </div>`;
+                    
+                }catch(error){
+                    console.error('Error:', error);
+                }
+            }
+
+            async function saveAddress(){
+                
+                var Address=document.getElementById("Address").value;
+                var Locality=document.getElementById("Locality").value;
+                var Pin=document.getElementById("Pin").value;
+                try{
+                    const url = 'http://localhost:8080/mistyles/AddressServlet';
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ "Address":Address,"Locality":Locality,"Pin":Pin }),
+                    });
+                    console.log(response.status);
+                    if(response.status==201){
+                        window.location.href="payment.html";
+                    }
+                    else{
+                        alert("Please fill all the details");
+                    }
+                }catch(error){
+                    console.error('Error:', error);
+                }
+            }
+
+            function price(p,d){
+                return Math.round(p-(p*d/100));
+            }
+
+            function callhome(){
+                window.location.href="home.html";
+            }
+            function callprofile(){
+                window.location.href="profile.html";
+            }
+        </script>
+    </body>
+</html>

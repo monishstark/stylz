@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="productdetail.css">
+        <link rel="stylesheet" href="header.css">
+        <meta charset="UTF-8">
+
+    </head>
+    <body>
+        <div class="header">
+            <div class="leftpart">
+            <div><img src="shopping-bag.gif" class="logoimg" onclick="callhome()"></div>
+        </div>
+        <div class="rightpart">
+            <form action="" class="searchBar" id="cityForm" style="height: 40px;">
+                <input type="text" id ="sInput"placeholder="Search for products" autocomplete="off">
+                <button id ="btn"type="submit" ><img src="search-interface-symbol.png" class="btnimg"></button>
+            </form>
+            <div class="pcont" onclick="callprofile()">
+                <img src="user.png" class="pimg">
+                <div >Profile</div>
+            </div>
+            <div class="ccont" onclick="callcart()">
+                <img src="shopping-cart.png" class="cartimg">
+                <div>Cart</div>
+            </div>
+        </div>
+    
+    </div>
+    <div id="suggest" class="autocomplete-suggestions"></div>
+        <div class="page">
+            <div class="lside">
+
+            </div>
+            <div class="rside">
+                <div class="details">
+                    <div class="ctitle"></div>
+                    <div class="cdes"></div>
+                    <div class="rating">
+                        rating
+    
+                    </div>
+                    <div class="price">
+                        <div class="cp">₹</div>
+                        <div class="p"></div>
+                        <div class="d">${arr[i].discount}% OFF</div>
+                    </div>
+                </div>
+                
+                <div class="addcart">
+                    
+
+                        <img src="shopping-bag (1).png" alt="" class="bgimg">
+                        <div class="textcart">
+                            Add to Cart
+                        
+                    </div>
+                </div>
+                <div class="seprater">
+
+                </div>
+
+                <div class="extra">
+                    <div class="line1">100% Original Products</div>
+                    <div class="line2">Pay on delivery might be available</div>
+                    <div class="line3">Easy 14 days returns and exchanges</div>
+                    <div class="line4">Try & Buy might be available</div>
+
+                </div>
+
+                <div class="seprater">
+                    
+                </div>
+
+                <div class="extra2">
+                    <div class="eline1">Bank Offer</div>
+                    <ul>
+                        
+                        <li>10% off on ICICI Bank Credit Cards, up to ₹1500. On orders of ₹5000 and above</li>
+                        <li>10% off on ICICI Bank Debit Cards, up to ₹500. On orders of ₹5000 and above</li>
+                        <li>₹125 Instant Cashback on Paytm Wallet. Min Order Value ₹1,250. Valid once per Paytm account</li>
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="review">
+            <div>Customer review</div>
+            <div id="reviewdata">
+
+            </div>
+
+        </div>
+
+        
+        <script>
+           
+        document.addEventListener('DOMContentLoaded', function() {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const id = urlParams.get('id');
+                    console.log(id);
+                    fetchproduct(id);
+
+                    
+                        
+                    
+                });
+
+
+
+                async function fetchproduct(id) {
+                    console.log("working");
+                    try {
+                        const response = await fetch(`http://localhost:8080/mistyles/ProductDetails?id=${id}`);
+                        const json = await response.json();
+                        const arr = json;
+                        console.log(arr[0]);
+                        var randomRating = Math.random() * (5 - 3) + 3;
+
+                        randomRating = Math.round(randomRating*100 )/100 ;
+                        document.querySelector('.lside').innerHTML = `<img src="${arr[0].img}" class="limg" style="height: 420px; width: 315px;">`;
+                            document.querySelector('.ctitle').innerHTML = arr[0].pname;
+                            document.querySelector('.cdes').innerHTML = arr[0].pdetails;
+                            document.querySelector('.cp').innerHTML = `₹${tprice(arr[0].price, arr[0].discount)}`;
+                    document.querySelector('.p').innerHTML = `₹${arr[0].price}`;
+                    document.querySelector('.d').innerHTML = `${arr[0].discount}% OFF`;
+                    document.querySelector('.rating').innerHTML = `${randomRating} ★`;
+                            
+                            
+                            document.querySelector('.addcart').addEventListener('click', function() {
+                                addtoCart(arr[0].id,arr[0].price);
+                            });
+                            addreview(arr[0].type);
+                        
+                    } catch (error) {
+                        console.error('Error:', error);
+                    }
+                }
+                function tprice(price, discount) {
+                    return price - (price * discount / 100);
+                }
+
+                async function addtoCart(id,price){
+                    console.log(id);
+
+                
+
+
+                    try{
+
+                        const url = 'http://localhost:8080/mistyles/CartServlet';
+            
+                        const response = await fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ "id": id, "price": price }),
+                        });
+                        
+
+                    }catch(error){
+                        console.error('Error:', error);
+                        
+                    }
+
+                }
+
+            async function fetchsuggestions(s){
+                try {
+                    if (s == "") {
+                        document.getElementById("suggest").innerHTML = "";
+                        return;
+                    }
+                    const response = await fetch(`http://localhost:8080/mistyles/Autofill?word=${s}`);
+                    const data = await response.json();
+                    console.log(data);
+                    var suggest = document.getElementById("suggest");
+                    var t="";
+                    for(var i=0;i<data.length;i++){
+                        t+=`<div class="sug" onclick="search('${data[i]}')">${data[i]}</div>`;
+                    }
+                    suggest.innerHTML=t;
+                    
+                } catch (error) {
+                    console.error('Error:', error);
+                    throw error;
+                }
+            }
+
+            async function addreview(type){
+                try{
+                    const response = await fetch(`http://localhost:8080/mistyles/Review?type=${type}`);
+                    const data = await response.json();
+                    console.log(data);
+                    const card=document.getElementById("reviewdata");
+                    var t="";
+                    for(var i=0;i<3;i++){
+                        var randomRating = Math.random() * (5 - 3) + 3;
+
+                        randomRating = Math.round(randomRating ) ;
+                        t+=`<div class="rcards"><div class="rtitle">${data[i].title}</div>
+                            <div class="rrating">${randomRating}</div>
+                            <div class="rdesc">${data[i].desc}</div></div>`;
+                    }
+                    
+                    card.innerHTML=t;
+
+                    
+                }
+                catch(error){
+                    console.error('Error:', error);
+                }
+
+            }
+
+            function search(s){
+                window.location.href = "products.html?search="+s;
+            }
+
+            function callcart(){
+                window.location.href = "cart.html";
+            }
+
+            function callprofile(){
+                window.location.href = "profile.html";
+            }
+            function callhome(){
+                window.location.href="home.html";
+            }
+
+            async function addtoCart(id,price){
+                console.log(id);
+                
+                
+               
+
+
+                try{
+
+                    const url = 'http://localhost:8080/mistyles/CartServlet';
+        
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ "id": id, "price": price }),
+                    });
+
+                    showToast();
+                    
+
+                }catch(error){
+                    console.error('Error:', error);
+                    
+                }
+
+            }
+
+            function showToast() {
+                const toast = document.createElement("div");
+                toast.classList.add("toast");
+                toast.textContent = "Added to cart";
+                document.body.appendChild(toast);
+
+                setTimeout(function() {
+                    toast.remove();
+                }, 2000);
+            }
+
+
+        </script>
+
+        <style>
+            #reviewdata {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #f9f9f9;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.rcards{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items:flex-start;
+    margin-top: 10px;
+    width: 50%;
+
+}
+
+.rtitle {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.rrating {
+    font-size: 16px;
+    color: #FFC107;
+    margin-bottom: 5px;
+}
+
+.rdesc {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.seprater {
+        height: 1px;
+        background-color: #ccc;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .extra {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .line1 {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .line2,
+    .line3,
+    .line4 {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .extra2 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .eline1 {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    ul {
+        margin-top: 0;
+        margin-bottom: 10px;
+        padding-left: 20px;
+    }
+
+    li {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+    .toast {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 9999;
+}
+
+.toast.show {
+  opacity: 1;
+}
+        </style>
+        
+
+        
+    </body>
+</html>
